@@ -1,4 +1,9 @@
 import './App.css';
+import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Dashboard from './components/Dashboard';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -21,8 +26,28 @@ function App() {
             Learn React
           </a>
         </p>
-      </header>
+      <Router>
+      <div>
+      <Link to="/login">
+        <button type="button">Login</button>
+      </Link>
+      <Link to="/register">
+        <button type="button">Register</button>
+      </Link>
     </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+          <Dashboard />
+          </PrivateRoute>
+        } />
+      </Routes>
+    </Router>
+        </header>
+    </div>
+    
   );
 }
 
